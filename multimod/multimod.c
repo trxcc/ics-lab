@@ -25,11 +25,13 @@ uint64_t Constant(uint64_t m) {
 uint64_t plusmod(uint64_t x, uint64_t y, uint64_t m){
   uint64_t t = x + y;
   int flag = 0;
-  while (t < x || t < y) {
-    t = mod(mod(t, m) + Constant(m), m);
+  if (t < x || t < y) {
+    x = mod(t, m);
+    y = Constant(m);
+    t = x + y;
   }
   if (flag) return mod(mod(t, m) + Constant(m), m);
-  return mod(x + y, m);
+  return mod(t, m);
 }
 
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) {
