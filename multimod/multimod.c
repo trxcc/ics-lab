@@ -26,9 +26,10 @@ uint64_t plusmod(uint64_t x, uint64_t y, uint64_t m){
   uint64_t t = x + y;
   int flag = 0;
   if (t < x || t < y) {
-    t = plusmod(mod(t, m), Constant(m), m); 
+    t = plusmod(mod(t, m), Constant(m), m);
+    flag = 1; 
   }
-  if (flag) return mod(mod(t, m) + Constant(m), m);
+  if (flag) return t;
   return mod(t, m);
 }
 
