@@ -19,7 +19,7 @@ static uint64_t Constant(uint64_t m) {
     t <<= 1;
     t = mod(mod(tmp, m) + mod(t, m), m);
   }
-  return mod(ans, m);
+  return mod(mod(ans, m) + mod(1, m), m);
 }
 
 static uint64_t plusmod(uint64_t x, uint64_t y, uint64_t m){
