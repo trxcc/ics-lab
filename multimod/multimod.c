@@ -29,7 +29,7 @@ uint64_t plusmod(uint64_t x, uint64_t y, uint64_t m){
     t = plusmod(mod(t, m), Constant(m), m);
     flag = 1; 
   }
-  if (flag) return mod(t, m);
+  else return mod(t, m);
   return mod(t, m);
 }
 
