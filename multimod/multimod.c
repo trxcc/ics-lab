@@ -8,8 +8,8 @@ uint64_t mod(uint64_t a, uint64_t b) {
   return a;
 }
 
-static uint64_t Constant(uint64_t m) {
-  int flag = 64;
+uint64_t Constant(uint64_t m) {
+  int flag = 6;
   uint64_t t = 1;
   uint64_t ans = 0;
   while(flag--) {
