@@ -1,8 +1,7 @@
 #include <stdint.h>
-#include <stdio.h>
 //static const uint64_t N = 9223372036854775808;
 
-static uint64_t mod(uint64_t a, uint64_t b) {
+uint64_t mod(uint64_t a, uint64_t b) {
   while (a >= b) {
     a -= b;
   }
@@ -28,7 +27,6 @@ static uint64_t plusmod(uint64_t x, uint64_t y, uint64_t m){
 }
 
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) {
-  printf("%lu\n", mod(100, 31));
   uint64_t t = a + b;
   uint64_t ans = 0, tmp = b;
   while(a != 0)  {
