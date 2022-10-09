@@ -14,11 +14,9 @@ uint64_t Constant(uint64_t m) {
   int t = 1;
   uint64_t ans = 0;
   while(flag--) {
-    printf("t: %d\n", t);
     ans = mod(mod(ans, m) + mod(t, m), m);
-    uint64_t tmp = t;
     t <<= 1;
-    t = mod(mod(tmp, m) + mod(t, m), m);
+    t = mod(mod(tmp, m) + mod(1, m), m);
   }
   return mod(mod(ans, m) + mod(1, m), m);
 }
