@@ -23,8 +23,11 @@ uint64_t Constant(uint64_t m) {
 }
 
 uint64_t plusmod(uint64_t x, uint64_t y, uint64_t m){
-  uint64_t t = mod(x + y, N);
-  return mod((mod(t, m)+Constant(m)), m);
+  uint64_t t = x + y;
+  if (t < x || t < y) {
+    return mod(mod(t, m) + Constant(m), m);
+  }
+  return mod(x + y, m);
 }
 
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) {
