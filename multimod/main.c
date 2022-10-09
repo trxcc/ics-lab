@@ -8,7 +8,7 @@ extern uint64_t Constant(uint64_t);
 
 void test(uint64_t a, uint64_t b, uint64_t m) {
   #define U64 "%" PRIu64
-  printf(U64 "\n", COnstant(31));
+  printf(U64 "\n", Constant(31));
   printf(U64 " * " U64 " mod " U64 " = " U64 "\n", a, b, m, multimod(a, b, m));
 }
 
