@@ -14,8 +14,7 @@ uint64_t Constant(uint64_t m) {
   uint64_t t = 1;
   uint64_t ans = 0;
   while(flag--) {
-    #define U64 "%" PRIu64
-    printf("t:" U64 "\n", t);
+    printf("%lu\n", t);
     ans = mod(mod(ans, m) + mod(t, m), m);
     uint64_t tmp = t;
     t <<= 1;
