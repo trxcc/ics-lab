@@ -1,8 +1,8 @@
 #include <stdint.h>
 
-static const uint64_t N = (unsigned)9223372036854775808;
+//static const uint64_t N = 9223372036854775808;
 
-static uint64_t mod(uint64_t a, uint64_t b) {
+static inline uint64_t mod(uint64_t a, uint64_t b) {
   while (a >= b) {
     a -= b;
   }
@@ -10,7 +10,16 @@ static uint64_t mod(uint64_t a, uint64_t b) {
 }
 
 static inline uint64_t Constant(uint64_t m) {
-  return mod((mod(N, m) + mod(N, m)), m);
+  int flag = 64;
+  uint64_t t = 1;
+  uint64_t ans = 0;
+  while(flag--) {
+    ans = mod(mod(ans, m) + mod(t, m), m);
+    uint64_t tmp = t;
+    t <<= 1;
+    t = mod(mod(tmp, m) + mod(t, m), m);
+  }
+  return mod(ans, m);
 }
 
 static uint64_t plusmod(uint64_t x, uint64_t y, uint64_t m){
