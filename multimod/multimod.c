@@ -16,7 +16,7 @@ uint64_t Constant(uint64_t m) {
   while(flag--) {
     ans = mod(mod(ans, m) + mod(t, m), m);
     t <<= 1;
-    t = mod(mod(tmp, m) + mod(1, m), m);
+    t = mod(mod(t, m) + mod(1, m), m);
   }
   return mod(mod(ans, m) + mod(1, m), m);
 }
