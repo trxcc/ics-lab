@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include <stdio.h>
-//static const uint64_t N = 9223372036854775808;
+static const uint64_t N = -1ULL;
 
 uint64_t mod(uint64_t a, uint64_t b) {
   while (a >= b) {
@@ -10,7 +10,7 @@ uint64_t mod(uint64_t a, uint64_t b) {
 }
 
 uint64_t Constant(uint64_t m) {
-  int flag = 64;
+  /*int flag = 64;
   uint64_t t = 1;
   uint64_t ans = 0;
   while(flag--) {
@@ -19,7 +19,8 @@ uint64_t Constant(uint64_t m) {
     t = mod(t, m);
     //t = mod(mod(t, m) + mod(1, m), m);
   }
-  return mod(mod(ans, m) + mod(1, m), m);
+  return mod(mod(ans, m) + mod(1, m), m);*/
+  return mod(N, m);
 }
 
 static uint64_t plusmod(uint64_t x, uint64_t y, uint64_t m){
