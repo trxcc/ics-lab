@@ -38,7 +38,7 @@ uint64_t plusmod(uint64_t x, uint64_t y, uint64_t m){
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) {
   uint64_t ans = 0, tmp = b;
   while(a != 0)  {
-    uint64_t a0 = mod(a, 2);
+    uint64_t a0 = a & 1;
     if(a0) ans = plusmod(ans, tmp, m);
     tmp <<= 1;
     tmp = mod(tmp, m);
