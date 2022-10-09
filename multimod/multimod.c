@@ -4,10 +4,9 @@
 const uint64_t N = -1ULL;
 
 uint64_t mod(uint64_t a, uint64_t b) {
-  while (a >= b) {
-    a -= b;
-  }
-  return a;
+  if(a < b) return a;
+  uint64_t tmp = a >> 1;
+  return mod(a & 1, b) + (mod(tmp, b) << 1);
 }
 
 uint64_t Constant(uint64_t m) {
