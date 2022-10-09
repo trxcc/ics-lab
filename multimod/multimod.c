@@ -24,12 +24,12 @@ uint64_t Constant(uint64_t m) {
 
 uint64_t plusmod(uint64_t x, uint64_t y, uint64_t m){
   uint64_t t = x + y;
-  int flag = 0;
   if (t < x || t < y) {
     t = plusmod(mod(t, m), Constant(m), m);
-    flag = 1; 
   }
   else return mod(t, m);
+  int k = mod(t, m);
+  printf("%d\n", k);
   return mod(t, m);
 }
 
