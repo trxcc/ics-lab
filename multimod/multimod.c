@@ -10,7 +10,7 @@ uint64_t mod(uint64_t a, uint64_t b) {
 }
 
 uint64_t Constant(uint64_t m) {
-  int flag = 6;
+  int flag = 64;
   int t = 1;
   uint64_t ans = 0;
   while(flag--) {
