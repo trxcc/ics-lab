@@ -17,6 +17,7 @@ uint64_t Constant(uint64_t m) {
     printf("%d\n", flag);
     ans = mod(mod(ans, m) + mod(t, m), m);
     t <<= 1;
+    t = mod(t, m);
     //t = mod(mod(t, m) + mod(1, m), m);
   }
   return mod(mod(ans, m) + mod(1, m), m);
