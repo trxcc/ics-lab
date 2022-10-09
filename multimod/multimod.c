@@ -11,11 +11,12 @@ uint64_t mod(uint64_t a, uint64_t b) {
 
 uint64_t Constant(uint64_t m) {
   int flag = 64;
-  int t = 1;
+  uint64_t t = 1;
   uint64_t ans = 0;
   while(flag--) {
     ans = mod(mod(ans, m) + mod(t, m), m);
     t <<= 1;
+    printf("hhh\n");
     //t = mod(mod(t, m) + mod(1, m), m);
   }
   return mod(mod(ans, m) + mod(1, m), m);
