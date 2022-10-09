@@ -1,6 +1,6 @@
 #include <stdint.h>
 
-static const uint64_t N = 9223372036854775808;
+static const uint64_t N = (unsigned)9223372036854775808;
 
 static uint64_t mod(uint64_t a, uint64_t b) {
   while (a >= b) {
