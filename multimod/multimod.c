@@ -6,7 +6,7 @@ const uint64_t N = -1ULL;
 uint64_t mod(uint64_t a, uint64_t b) {
   if(a < b) return a;
   uint64_t tmp = (mod(a >> 1, b) << 1) + (a & 1);
-  while(tmp > b) tmp -= b;
+  while(tmp >= b) tmp -= b;
   return tmp;
 }
 
