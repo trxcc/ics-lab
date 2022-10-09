@@ -21,7 +21,7 @@ uint64_t Constant(uint64_t m) {
 }
 
 uint64_t plusmod(uint64_t x, uint64_t y, uint64_t m){
-  uint64_t t = x + y;
+  uint64_t t = mod(x + y, m);
   return mod((mod(t, m)+Constant(m)), m);
 }
 
