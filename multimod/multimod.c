@@ -2,14 +2,14 @@
 
 //static const uint64_t N = 9223372036854775808;
 
-static inline uint64_t mod(uint64_t a, uint64_t b) {
+static uint64_t mod(uint64_t a, uint64_t b) {
   while (a >= b) {
     a -= b;
   }
   return a;
 }
 
-static inline uint64_t Constant(uint64_t m) {
+static uint64_t Constant(uint64_t m) {
   int flag = 64;
   uint64_t t = 1;
   uint64_t ans = 0;
