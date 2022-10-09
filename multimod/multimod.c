@@ -28,8 +28,6 @@ uint64_t plusmod(uint64_t x, uint64_t y, uint64_t m){
     t = plusmod(mod(t, m), Constant(m), m);
   }
   else return mod(t, m);
-  int k = mod(t, m);
-  printf("%d\n", k);
   return mod(t, m);
 }
 
