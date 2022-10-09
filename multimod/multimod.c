@@ -5,8 +5,7 @@ const uint64_t N = -1ULL;
 
 uint64_t mod(uint64_t a, uint64_t b) {
   if(a < b) return a;
-  uint64_t tmp = a >> 1;
-  return mod(a & 1, b) + (mod(tmp, b) << 1);
+  return mod(mod(a >> 1, b) << 1 + mod(a & 1, b), b);
 }
 
 uint64_t Constant(uint64_t m) {
