@@ -16,7 +16,7 @@ int asm_popcnt(uint64_t x) {
   /*for (int i = 0; i < 64; i++) {
     if ((x >> i) & 1) s++;
   }*/
-  printf("%x\n", x);
+  printf("%lx\n", x);
   asm(
     "movl $0x0, %%eax;"
     ".loop:;"
