@@ -12,7 +12,7 @@ int64_t asm_add(int64_t a, int64_t b) {
 }
 
 int asm_popcnt(uint64_t x) {
-  int s = 0;
+  int s = 0, i = 0;
   /*for (int i = 0; i < 64; i++) {
     if ((x >> i) & 1) s++;
   }*/
@@ -35,7 +35,7 @@ int asm_popcnt(uint64_t x) {
     ".L2:;"
     "movl %1, %%eax"
     : "=c"(s)
-    : "0"(s), "r"(x)
+    : "0"(s), "r"(x), "a"(i)
     : "%esi"
   );
   return s;
