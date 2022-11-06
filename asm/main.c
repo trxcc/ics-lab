@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 int main() {
-  char s[] = "whatever", l[] = "", *ds = &l[0], *sc = &s[0];
+  char s[] = "whatever", l[] = "i", *ds = &l[0], *sc = &s[0];
   asm_jmp_buf buf;
   int r = asm_setjmp(buf);
   if (r == 0) {
