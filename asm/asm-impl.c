@@ -38,6 +38,7 @@ int asm_popcnt(uint64_t x) {
     : "0"(s), "r"(x)
     : "%esi"
   );
+  printf("%d\n", s);
   return s;
 }
 
