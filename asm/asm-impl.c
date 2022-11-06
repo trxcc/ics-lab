@@ -47,11 +47,11 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
     ".mem_loop:;"
     "cmpq %%rdx, %%rax;"
     "jge .mem_L2;"
-    "movl (%1, %%rax), %%ebx;"
+    "movl (%%rsi, %%rax), %%ebx;"
     "movl %%ebx, (%0, %%rax);"
     "addq $0x1, %%rax;"
     "addq $0x1, %0;"
-    "addq $0x1, %1;"
+    "addq $0x1, %rsi;"
     "jmp .mem_loop;"
     ".mem_L2:"
     : 
