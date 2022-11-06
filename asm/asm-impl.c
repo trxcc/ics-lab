@@ -45,7 +45,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
   asm(
     "movq $0x0, %%rax;"
     ".mem_loop:;"
-    "cmpq %%rsi, %%rax;"
+    "cmpq %%rdx, %%rax;"
     "jge .mem_L2;"
     "addq $0x1, %%rax;"
     "movl (%1, %%rax), %%ebx;"
@@ -55,7 +55,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
     "jmp .mem_loop;"
     ".mem_L2:"
     : 
-    : "c"(d0), "d"(src), "S"(n)
+    : "c"(d0), "S"(src)
   );
   return dest;
 }
