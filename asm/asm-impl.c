@@ -18,9 +18,8 @@ int asm_popcnt(uint64_t x) {
   }*/
   asm(
     "movl $0x0, %%eax;"
-    "movl $0x40, %%edi;"
     ".loop:;"
-    "cmpl %%edi, %%eax;"
+    "cmpl $64, %%eax;"
     "jge .L2;"
     "addl $0x1, %%eax;"
     "shrq $0x1, %2;"
