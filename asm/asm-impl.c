@@ -52,7 +52,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
     "addq $0x1, %%rax;"
     //"addq $0x1, %0;"
     //"addq $0x1, %1;"
-    "jmp .mem_loop;"
+    //"jmp .mem_loop;"
     ".mem_L2:"
     : 
     : "c"(d0), "S"(src)
