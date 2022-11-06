@@ -26,7 +26,7 @@ int asm_popcnt(uint64_t x) {
     "movq %2, %%rbx;"
     "andb $0x1, %%bl;"
     "cmpb $0x0, %%bl;"
-    "jb .L1;"
+    "jg .L1;"
     "jmp .loop;"
     ".L1:;"
     "addl $0x1, %1;"
