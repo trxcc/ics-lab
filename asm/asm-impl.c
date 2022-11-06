@@ -41,7 +41,7 @@ int asm_popcnt(uint64_t x) {
 }
 
 void *asm_memcpy(void *dest, const void *src, size_t n) {
-  void *d0 = dest, *s0 = src;
+  void *d0 = dest;
   asm(
     "movl $0x0, %%eax;"
     ".loop:;"
@@ -54,7 +54,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
     "jmp .loop;"
     ".L2:"
     : 
-    : "c"(d0), "d"(s0), "S"(n)
+    : "c"(d0), "d"(src), "S"(n)
   );
   return dest;
 }
