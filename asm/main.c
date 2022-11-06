@@ -3,10 +3,10 @@
 #include <stdio.h>
 
 int main() {
-  char s[] = "whatever", *sc = &s[0];
+  char s[] = "abc", *sc = &s[0];
   asm_jmp_buf buf;
   int r = asm_setjmp(buf);
-  char l[] = "i", *ds = &l[0];
+  char l[] = "123", *ds = &l[0];
   if (r == 0) {
     assert(asm_add(1234, 5678) == 6912);
     printf("%s\n", (char *)asm_memcpy(ds, sc, 3));
