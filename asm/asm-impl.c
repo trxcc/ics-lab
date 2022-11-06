@@ -24,18 +24,18 @@ int asm_popcnt(uint64_t x) {
     "jge .L2;"
     "addl $0x1, %%eax;"
     "shrq $0x1, %2;"
-    "movq %2, %%rbx;"
+    "movq %3, %%rbx;"
     "andb $0x1, %%bl;"
     "cmpb $0x0, %%bl;"
     "jg .L1;"
     "jmp .loop;"
     ".L1:;"
-    "addl $0x1, %1;"
+    "addl $0x1, %2;"
     "jmp .loop;"
     ".L2:;"
-    "movl %1, %%eax"
-    : "=c"(s)
-    : "0"(s), "r"(x), "a"(i)
+    "movl %2, %%eax"
+    : "=c"(s), "=a"(i)
+    : "0"(s), "r"(x), "1"(i)
     : "%esi"
   );
   printf("i: %d\n", i);
