@@ -44,15 +44,16 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
   void *d0 = dest;
   asm(
     "movl $0x0, %%eax;"
-    ".loop1:;"
+    ".mem_loop:;"
     "cmpl %%esi, %%eax;"
-    "jge .L21;"
+    "jge .mem_L2;"
     "addl $0x1, %%eax;"
-    "movl (%0), (%1);"
-    "addl $0x1, %0;"
-    "addl $0x1, %1;"
-    "jmp .loop;"
-    ".L21:"
+    "movl (%1), %%ebx;"
+    "movl %%ebx, (%0);"
+    "addq $0x1, %0;"
+    "addq $0x1, %1;"
+    "jmp .mem_loop;"
+    ".mem_L2:"
     : 
     : "c"(d0), "d"(src), "S"(n)
   );
