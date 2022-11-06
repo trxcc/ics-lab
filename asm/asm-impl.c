@@ -48,7 +48,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
     "cmpq %%rdx, %%rax;"
     "jge .mem_L2;"
     "movw (%%rsi, %%rax), %%bx;"
-    "movw %%bx, (%0, %%rax);"
+    "movw %%bx, (%%rcx, %%rax);"
     "addq $0x1, %%rax;"
     //"addq $0x1, %0;"
     //"addq $0x1, %%rsi;"
