@@ -56,7 +56,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
     ".mem_L2:"
     : 
     : "c"(d0)
-    : 
+    : "%rax" 
   );
   return dest;
 }
