@@ -12,7 +12,7 @@ int64_t asm_add(int64_t a, int64_t b) {
 }
 
 int asm_popcnt(uint64_t x) {
-  int s = 0, i = 0;
+  int s = 0;
   /*for (int i = 0; i < 64; i++) {
     if ((x >> i) & 1) s++;
   }*/
@@ -23,10 +23,10 @@ int asm_popcnt(uint64_t x) {
     "cmpl $64, %%eax;"
     "jge .L2;"
     "addl $0x1, %%eax;"
-    "shrq $0x1, %2;"
     "movq %2, %%rbx;"
-    "andq $0x1, %%rbx;"
-    "cmpq $0x0, %%rbx;"
+    "shrq $0x1, %2;"
+    "andb $0x1, %%bl;"
+    "cmpb $0x0, %%bl;"
     "jne .L1;"
     "jmp .loop;"
     ".L1:;"
