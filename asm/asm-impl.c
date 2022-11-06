@@ -1,6 +1,6 @@
 #include "asm.h"
 #include <string.h>
-
+#include <stdio.h>
 int64_t asm_add(int64_t a, int64_t b) {
   asm(
     "addq %2, %1"
