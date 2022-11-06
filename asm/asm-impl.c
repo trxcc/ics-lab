@@ -21,7 +21,7 @@ int asm_popcnt(uint64_t x) {
     "movl $0x40, %%edi;"
     ".loop:;"
     "cmp %%edi, %%eax;"
-    "jge .ret;"
+    "jge .L2;"
     "shrq $0x1, %2;"
     "movq %2, %%rbx;"
     "andb $0x1, %%bl;"
@@ -31,9 +31,8 @@ int asm_popcnt(uint64_t x) {
     "jmp .loop;"
     ".L1:;"
     "addl $0x1, %1;"
-    ".ret:;"
-    "movl %1, %%eax;"
-    "retq"
+    ".L2:;"
+    "movl %1, %%eax"
     : "=c"(s)
     : "0"(s), "r"(x)
     : "%esi"
