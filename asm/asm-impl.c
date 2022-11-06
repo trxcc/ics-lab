@@ -45,18 +45,18 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
   asm(
     "subq %%rax, %%rax;"
     ".mem_loop:;"
-    //"cmpq %%rdx, %%rax;"
-    //"jge .mem_L2;"
-    //"movl (%1, %%rax), %%ebx;"
-    //"movl %%ebx, (%0, %%rax);"
-    //"addq $0x1, %%rax;"
-    //"addq $0x1, %0;"
-    //"addq $0x1, %1;"
-    //"jmp .mem_loop;"
+    "cmpq %%rdx, %%rax;"
+    "jge .mem_L2;"
+    "movl (%1, %%rax), %%ebx;"
+    "movl %%ebx, (%0, %%rax);"
+    "addq $0x1, %%rax;"
+    "addq $0x1, %0;"
+    "addq $0x1, %1;"
+    "jmp .mem_loop;"
     ".mem_L2:"
     : 
     : "c"(d0)
-    : "%rax"
+    : 
   );
   return dest;
 }
