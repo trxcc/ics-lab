@@ -43,12 +43,12 @@ int asm_popcnt(uint64_t x) {
 void *asm_memcpy(void *dest, const void *src, size_t n) {
   void *d0 = dest;
   asm(
-    "subq %%rax, %%rax;"
+    "movl $0x0, %%rax;"
     ".mem_loop:;"
     "cmpq %%rdx, %%rax;"
     "jge .mem_L2;"
-    "movl (%%rsi, %%rax), %%ebx;"
-    "movl %%ebx, (%0, %%rax);"
+    "movb (%%rsi, %%rax), %%bl;"
+    "movb %%bl, (%0, %%rax);"
     "addq $0x1, %%rax;"
     "addq $0x1, %0;"
     "addq $0x1, %%rsi;"
