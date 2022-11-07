@@ -5,11 +5,9 @@
 //#include <setjmp.h> // remove this
 
 typedef struct{
-  void *rax;
   void *rbx;
-  void *rcx;
-  void *rdx;
   void *rsi;
+  void *rdi;
   void *rbp;
   void *rsp;
   void *rip;
