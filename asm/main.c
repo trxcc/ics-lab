@@ -30,7 +30,7 @@ int main() {
     printf("%s\n", (char *)asm_memcpy(ds, sc, 3));
     assert(asm_popcnt(0x0123456789abcdefULL) == 32);
     assert(asm_popcnt(0xefULL) == 7);
-    assert(asm_popcnt(0xffffffffffffffffULL) == 64);
+    assert(asm_popcnt(0xfULL) == 4);
     // TODO: add more tests here.
     printf("%d\n", r);
     asm_longjmp(buf, 123); 
