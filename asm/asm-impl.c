@@ -77,7 +77,7 @@ int asm_setjmp(asm_jmp_buf env) {
     "subq %%rax, %%rax"
     : 
     :   
-    : "%rax", "%rcx" 
+    :  "%rcx" 
   ); 
   return 0;
 }
