@@ -83,18 +83,20 @@ int asm_setjmp(asm_jmp_buf env) {
 
 void asm_longjmp(asm_jmp_buf env, int val) {
   asm(
-    
-    "testl %%esi, %%esi;"
+    "leaq 8(%%rsp), %%rax;"
+    "movl 16(%%rsp), %%ecx"
+    "testl %%ecx, %%ecx;"
     "jne .long_L1;"
     //"movq 0(%%rdi), %%rax;"
-    "movq 8(%%rdi), %%rbx;"
+    "movq 0(%%rax), %%rbx;"
     //"movq 16(%%rdi), %%rcx;"
     //"movq 24(%%rdi), %%rdx;"
-    "movq 32(%%rdi), %%rsi;"
-    "movq 40(%%rdi), %%rbp;"
-    "movq 48(%%rdi), %%rsp;"
-    "movq 56(%%rdi), %%rdi;"
-    "jmp *(%%rdi);"
+    "movq 8(%%rax), %%rsi;"
+    "movq 16(%%rax), %%rdi;"
+    "movq 24(%%rax), %%rbp;"
+    "movq 32(%%rax), %%rsp;"
+    "movq 40(%%rax), %%rbx;"
+    "jmp *(%%rbx);"
     ".long_L1:"
     :
     :
