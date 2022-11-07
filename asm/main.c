@@ -3,10 +3,10 @@
 #include <stdio.h>
 
 
-int f(int n) {
+int f(int n, asm_jmp_buf env) {
   if (n >= 8) asm_longjmp(env, n);
   printf("Call f(%d)\n", n);
-  return f(n + 1);
+  return f(n + 1, env);
 }
 
 int main() {
