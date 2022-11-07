@@ -2,7 +2,7 @@
 #include <assert.h>
 #include <stdio.h>
 
-
+/*
 int f(int n, asm_jmp_buf env) {
   if (n >= 8) asm_longjmp(env, n);
   printf("Call f(%d)\n", n);
@@ -18,8 +18,8 @@ int main() {
     printf("Recursion reaches %d\n", r);
   }
 }
+*/
 
-/*
 int main() {
   char s[] = "abc", *sc = &s[0];
   asm_jmp_buf buf;
@@ -30,6 +30,7 @@ int main() {
     printf("%s\n", (char *)asm_memcpy(ds, sc, 3));
     assert(asm_popcnt(0x0123456789abcdefULL) == 32);
     assert(asm_popcnt(0xefULL) == 7);
+    assert(asm_popcnt(0) == 0);
     // TODO: add more tests here.
     printf("%d\n", r);
     asm_longjmp(buf, 123); 
@@ -37,4 +38,4 @@ int main() {
     assert(r == 123);
     printf("PASSED.\n");
   }
-}*/
+}
