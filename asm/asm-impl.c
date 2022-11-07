@@ -22,6 +22,7 @@ int asm_popcnt(uint64_t x) {
     "cmpl $64, %%eax;"
     "jae .L2;"
     "addl $0x1, %%eax;"
+    "movq %2, %%rbx;"
     "shrq $0x1, %2;"
     "andb $0x1, %%bl;"
     "cmpb $0x0, %%bl;"
