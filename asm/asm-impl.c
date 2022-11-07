@@ -76,7 +76,7 @@ int asm_setjmp(asm_jmp_buf env) {
     //"movq %%rcx, 40(%%rdi)"
     : 
     :   
-    :  "%rdi", "%rbx", "%rsi", "%rax" 
+    : "%rax" 
   ); 
   return 0;
 }
