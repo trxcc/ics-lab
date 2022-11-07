@@ -2,6 +2,24 @@
 #include <assert.h>
 #include <stdio.h>
 
+jmp_buf env;
+
+int f(int n) {
+  if (n >= 8) asm_longjmp(env, n);
+  printf("Call f(%d)\n", n);
+  return f(n + 1);
+}
+
+int main() {
+  int r = setjmp(env);
+  if (r == 0) {
+    f(1);
+  } else {
+    printf("Recursion reaches %d\n", r);
+  }
+}
+
+/*
 int main() {
   char s[] = "abc", *sc = &s[0];
   asm_jmp_buf buf;
@@ -19,4 +37,4 @@ int main() {
     assert(r == 123);
     printf("PASSED.\n");
   }
-}
+}*/
