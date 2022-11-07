@@ -11,7 +11,7 @@ int f(int n) {
 }
 
 int main() {
-  int r = setjmp(env);
+  int r = asm_setjmp(env);
   if (r == 0) {
     f(1);
   } else {
