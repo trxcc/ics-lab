@@ -14,7 +14,8 @@ int main() {
     assert(asm_popcnt(0xefULL) == 7);
     // TODO: add more tests here.
     printf("%d\n", r);
-    asm_longjmp(buf, 123);
+    asm_longjmp(buf, 123); 
+    printf("nizaiganshenme\n");
   } else {
     assert(r == 123);
     printf("PASSED.\n");
