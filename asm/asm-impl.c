@@ -34,7 +34,7 @@ int asm_popcnt(uint64_t x) {
     ".L2:;"
     "movl %1, %%eax"
     : "=c"(s)
-    : "0"(s), "r"(x)
+    : "0"(s), "d"(x)
     : "%esi"
   );
   return s;
