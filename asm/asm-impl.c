@@ -32,9 +32,9 @@ int asm_popcnt(uint64_t x) {
     "addl $0x1, %1;"
     "jmp .loop;"
     ".L2:;"
-    "movl %1, %%eax"
-    : "=c"(s)
-    : "0"(s), "d"(x)
+   // "movl %1, %%eax"
+    : "+c"(s)
+    : "d"(x)
     : 
   );
   return s;
