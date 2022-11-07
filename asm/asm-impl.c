@@ -35,7 +35,7 @@ int asm_popcnt(uint64_t x) {
     "shrq $0x1, %%rdx;"
     "jmp .loop;"
     ".L2:;"
-    "movl %1, %%eax"
+    //"movl %1, %%eax"
     : "+c"(s)
     : "d"(x)
     : 
