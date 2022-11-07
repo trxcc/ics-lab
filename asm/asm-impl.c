@@ -64,7 +64,8 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 int asm_setjmp(asm_jmp_buf env) {
   int val;
   asm(
-    "leaq 8(%%rsp), %%rax;"
+    //"leaq 8(%%rsp), %%rax;"
+    "movq %%rdi, %%rax;"
     "movq %%rbx, 0(%%rax);"
     "movq %%rsi, 8(%%rax);"
     "movq %%rdi, 16(%%rax);"
@@ -84,7 +85,8 @@ void asm_longjmp(asm_jmp_buf env, int val) {
   asm(
     "cmpl $0x0, %%ecx;"
     "je .long_L1;"
-    "leaq 8(%%rsp), %%rax;"
+    //"leaq 8(%%rsp), %%rax;"
+    "movq %%rdi, %%rax;"
     "movq 0(%%rax), %%rbx;"
     "movq 8(%%rax), %%rsi;"
     "movq 16(%%rax), %%rdi;"
