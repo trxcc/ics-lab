@@ -3,10 +3,10 @@
 #include <stdio.h>
 int64_t asm_add(int64_t a, int64_t b) {
   asm(
-    "addq %2, %1"
+    "addq %1, %2"
     : "=a"(b)
-    : "0"(a), "b"(b)
-    : "%eax"
+    : "b"(a), "a"(b)
+    : 
   );
   return b;
 }
