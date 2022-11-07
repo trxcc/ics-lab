@@ -104,7 +104,7 @@ void asm_longjmp(asm_jmp_buf env, int val) {
     "movl %%ecx, %%eax;"
     //"jmp *%%rcx;"
     ".long_L1:"
-    : "=c"(val)
+    : 
     : "c"(val)
     : 
   );
