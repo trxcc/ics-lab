@@ -4,8 +4,8 @@
 int64_t asm_add(int64_t a, int64_t b) {
   asm(
     "addq %2, %1"
-    : "=r"(b)
-    : "0"(a), "r"(b)
+    : "=a"(b)
+    : "0"(a), "b"(b)
     : "%eax"
   );
   return b;
