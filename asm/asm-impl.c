@@ -64,6 +64,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 int asm_setjmp(asm_jmp_buf env) {
   asm(
     //"movq %%rax, 0(%%rdi);"
+    "movq 16(%%rbp), %%rdi;"
     "movq %%rbx, 8(%%rdi);"
     //"movq %%rcx, 16(%%rdi);"
     //"movq %%rdx, 24(%%rdi);"
@@ -73,7 +74,7 @@ int asm_setjmp(asm_jmp_buf env) {
     //"movq (%%rsp), %%rax;"
     //"movq %%rax, 56(%%rdi)"
     : 
-    :  "r"(env) 
+    :   
     :  "%rbx", "%rsi", "%rax" 
   ); 
   return 0;
