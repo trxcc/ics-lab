@@ -2,7 +2,6 @@
 #include <assert.h>
 #include <stdio.h>
 
-jmp_buf env;
 
 int f(int n) {
   if (n >= 8) asm_longjmp(env, n);
@@ -11,6 +10,7 @@ int f(int n) {
 }
 
 int main() {
+  asm_jmp_buf env;
   int r = asm_setjmp(env);
   if (r == 0) {
     f(1);
