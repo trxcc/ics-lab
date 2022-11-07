@@ -78,7 +78,7 @@ int asm_setjmp(asm_jmp_buf env) {
     "subl %%eax, %%eax"
     : "=a"(val)
     :   
-    : "%rax", "%rcx" 
+    : "%rcx" 
   ); 
   return val;
 }
