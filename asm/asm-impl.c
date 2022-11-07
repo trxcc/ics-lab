@@ -82,7 +82,7 @@ int asm_setjmp(asm_jmp_buf env) {
 
 void asm_longjmp(asm_jmp_buf env, int val) {
   asm(
-    "testw %%esi, %%esi;"
+    "testl %%esi, %%esi;"
     "jne .long_L1;"
     "movq 0(%%rdi), %%rax;"
     "movq 8(%%rdi), %%rbx;"
