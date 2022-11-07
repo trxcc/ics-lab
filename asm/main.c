@@ -13,6 +13,7 @@ int main() {
   asm_jmp_buf env;
   int r = asm_setjmp(env);
   if (r == 0) {
+    asm_longjmp(env, 123);
     f(1, env);
   } else {
     printf("Recursion reaches %d\n", r);
