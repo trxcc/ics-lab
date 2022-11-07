@@ -11,7 +11,7 @@ typedef struct{
   void *rbp;
   void *rsp;
   void *rip;
-}jmp_buf;
+}jmp_buf[1];
 
 #define asm_jmp_buf jmp_buf
 
