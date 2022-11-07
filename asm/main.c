@@ -15,7 +15,6 @@ int main() {
     // TODO: add more tests here.
     printf("%d\n", r);
     asm_longjmp(buf, 123); 
-    printf("nizaiganshenme\n");
   } else {
     assert(r == 123);
     printf("PASSED.\n");
