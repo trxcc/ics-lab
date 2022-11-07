@@ -62,6 +62,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 }
 
 int asm_setjmp(asm_jmp_buf env) {
+  int val;
   asm(
     //"movq %%rax, 0(%%rdi);"
     "leaq 8(%%rsp), %%rax;"
@@ -73,13 +74,13 @@ int asm_setjmp(asm_jmp_buf env) {
     "movq %%rbp, 24(%%rax);"
     "movq %%rsp, 32(%%rax);"
     "movq (%%rsp), %%rcx;"
-    "movq %%rcx, 40(%%rax)"
-    //"subq %%rax, %%rax"
-    : 
+    "movq %%rcx, 40(%%rax);"
+    "subq %%rax, %%rax"
+    : "=a"(val)
     :   
     : "%rax", "%rcx" 
   ); 
-  return 0;
+  return val;
 }
 
 void asm_longjmp(asm_jmp_buf env, int val) {
@@ -101,7 +102,6 @@ void asm_longjmp(asm_jmp_buf env, int val) {
     "movq 40(%%rax), %%rdx;"
     "movq %%rdx, (%%rsp);"
     "movq %%rcx, %%rax;"
-    "ret"
     //"jmp *%%rcx;"
     ".long_L1:"
     : "=c"(val)
