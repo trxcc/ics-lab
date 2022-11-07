@@ -65,15 +65,15 @@ int asm_setjmp(asm_jmp_buf env) {
   asm(
     //"movq %%rax, 0(%%rdi);"
     "movq 8(%%rsp), %%rax;"
-//    "movq %%rbx, 8(%%rax);"
+    "movq %%rbx, 0(%%rax);"
     //"movq %%rcx, 16(%%rdi);"
     //"movq %%rdx, 24(%%rdi);"
-  //  "movq %%rsi, 16(%%rax);"
-    //"movq %%rdi, 24(%%rax);"
-    //"movq %%rbp, 32(%%rax);"
-    //"movq %%rsp, 48(%%rax);"
-    //"movq (%%rsp), %%rax;"
-    //"movq %%rax, 56(%%rdi)"
+    "movq %%rsi, 8(%%rax);"
+    "movq %%rdi, 16(%%rax);"
+    "movq %%rbp, 24(%%rax);"
+    "movq %%rsp, 32(%%rax);"
+    "movq (%%rsp), %%rax;"
+    "movq %%rax, 40(%%rdi)"
     : 
     :   
     :  "%rdi", "%rbx", "%rsi", "%rax" 
