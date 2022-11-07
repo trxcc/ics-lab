@@ -4,7 +4,7 @@
 
 
 int f(int n, asm_jmp_buf env) {
-  if (n >= 1) asm_longjmp(env, n);
+  if (n >= 8) asm_longjmp(env, n);
   printf("Call f(%d)\n", n);
   return f(n + 1, env);
 }
