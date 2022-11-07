@@ -72,8 +72,8 @@ int asm_setjmp(asm_jmp_buf env) {
     "movq %%rdi, 16(%%rax);"
     "movq %%rbp, 24(%%rax);"
     "movq %%rsp, 32(%%rax);"
-    "movq (%%rsp), %%rcx;"
-    "movq %%rcx, 40(%%rdi)"
+    //"movq (%%rsp), %%rcx;"
+    //"movq %%rcx, 40(%%rdi)"
     : 
     :   
     :  "%rdi", "%rbx", "%rsi", "%rax" 
