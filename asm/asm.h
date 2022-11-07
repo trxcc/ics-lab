@@ -3,6 +3,18 @@
 
 // TODO: replace with your definition
 #include <setjmp.h> // remove this
+
+typedef struct{
+  void *rax;
+  void *rbx;
+  void *rcx;
+  void *rdx;
+  void *rsi;
+  void *rbp;
+  void *rsp;
+  void *rip;
+}jmp_buf;
+
 #define asm_jmp_buf jmp_buf
 
 int64_t asm_add(int64_t a, int64_t b);
