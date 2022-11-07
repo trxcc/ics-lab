@@ -31,6 +31,7 @@ int main() {
     assert(asm_popcnt(0x0123456789abcdefULL) == 32);
     assert(asm_popcnt(0xefULL) == 7);
     assert(asm_popcnt(0xf0ULL) == 4);
+    assert(asm_popcnt(0x7fffffffffffffffULL) == 63);
     // TODO: add more tests here.
     printf("%d\n", r);
     asm_longjmp(buf, 123); 
