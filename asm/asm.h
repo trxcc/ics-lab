@@ -11,9 +11,8 @@ typedef struct{
   void *rbp;
   void *rsp;
   void *rip;
-}jmp_buf[1];
+}asm_jmp_buf[1];
 
-#define asm_jmp_buf jmp_buf
 
 int64_t asm_add(int64_t a, int64_t b);
 int     asm_popcnt(uint64_t x);
