@@ -2,6 +2,7 @@
 #include <string.h>
 #include <assert.h>
 #include <stdio.h>
+#include <math.h>
 
 #define N 10000000
 
@@ -12,15 +13,19 @@ int *sieve(int n) {
   assert(n + 1 < N);
   for (int i = 0; i <= n; i++)
     is_prime[i] = true;
-
-  for (int i = 2; i <= n; i++) {
-    for (int j = i + i; j <= n; j += i) {
+  
+  for (int j = 4; j <= n; j += 2) {
+    is_prime[j] = false;
+  } 
+  for (int i = 3; i <= (int)sqrt(n); i += 2) {
+    for (int j = i * i; j <= n; j += i) {
       is_prime[j] = false;
     }
   }
 
   int *p = primes;
-  for (int i = 2; i <= n; i++)
+  *p++ = 2;
+  for (int i = 3; i <= n; i += 2)
     if (is_prime[i]) {
       *p++ = i;
     }
