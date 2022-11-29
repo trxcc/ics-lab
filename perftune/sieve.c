@@ -10,12 +10,14 @@ static int  primes[N];
 
 int *sieve(int n) {
   assert(n + 1 < N);
-  for (int i = 0; i <= n; i++)
+  for (int i = 3; i <= n; i += 2)
     is_prime[i] = true;
    
   for (int i = 3; i * i <= n; i += 2) {
-    for (int j = i * i; j <= n; j += i) {
-      is_prime[j] = false;
+    if (is_prime[i]) {
+      for (int j = i * i; j <= n; j += i) {
+        is_prime[j] = false;
+      }
     }
   }
 
