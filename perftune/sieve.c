@@ -38,7 +38,6 @@ int *sieve(int n) {
     if (!is_not_prime[i]) {
       primes[cnt++] = i;
     }
-    tmp = primes;
     for (int j = 0; j < cnt; j++) {
       if (i * primes[j] > n) break;
       is_not_prime[i * primes[j]] = true;
