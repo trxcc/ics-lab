@@ -31,16 +31,21 @@ int *sieve(int n) {
   *p = 0;
   return primes;
 */
-  int *p = primes, now = 0;
+  int *p = primes, *tmp = primes;
   for (int i = 2; i <= n; i++) {
     if (!is_not_prime[i]) {
       *p++ = i;
-      now ++;
     }
-    for (int j = 0; j < now; j++) {
-      if (i * primes[j] > n) break;
-      is_not_prime[i * primes[j]] = true;
-      if (!(i % primes[j])) break;
+    tmp = primes;
+    while (tmp != p) {
+      if (i * (*tmp) > n) {
+        break;
+      }
+      is_not_prime[i * (*tmp)] = true;
+      if (!(i % (*tmp))) {
+        break;
+      }
+      tmp ++;
     }
   }
   return primes;
