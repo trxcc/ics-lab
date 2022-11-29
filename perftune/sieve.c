@@ -9,7 +9,7 @@ static bool is_not_prime[N];
 static int  primes[N];
 
 int *sieve(int n) {
-  assert(n + 1 < N);
+  //assert(n + 1 < N);
 /*
   for (int i = 3; i <= n; i += 2)
     is_prime[i] = true;
@@ -31,22 +31,22 @@ int *sieve(int n) {
   *p = 0;
   return primes;
 */
-  int *p = primes, *tmp = primes;
+  
+
+  int cnt = 0;
   for (int i = 2; i <= n; i++) {
     if (!is_not_prime[i]) {
-      *p++ = i;
+      primes[cnt++] = i;
     }
     tmp = primes;
-    while (tmp != p) {
-      if (i * (*tmp) > n) {
+    for (int j = 0; j < cnt; j++) {
+      if (i * primes[j] > n) break;
+      is_not_prime[i * primes[j]] = true;
+      if (i % primes[j] == 0) {
         break;
       }
-      is_not_prime[i * (*tmp)] = true;
-      if (!(i % (*tmp))) {
-        break;
-      }
-      tmp ++;
     }
   }
   return primes;
+  
 }
