@@ -16,7 +16,7 @@ typedef struct{
 }CACHE_SLOT;
 
 static struct CACHE_SLOT *cache_slot;
-static uint32_t cache_total_width = 0, cache_associativity_width = 0, cache_group_num = 0;
+static uint32_t cache_total_width = 0, cache_associativity_width = 0, cache_group_width = 0;
 static uintptr_t group_num_mask = 0, tag_mask = 0, block_num_mask = 0, block_in_addr_mask = 0;
 
 #define get_group_num(x) ((uintptr_t)(((x) & group_num_mask) >> BLOCK_WIDTH))
@@ -76,14 +76,14 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 void init_cache(int total_size_width, int associativity_width) {
   cache_total_width = total_size_width;
   cache_associativity_width = associativity_width;
-  cache_group_num = total_size_width - BLOCK_WIDTH - associativity_width;
+  cache_group_width = total_size_width - BLOCK_WIDTH - associativity_width;
 
   block_in_addr_mask = mask_with_len(BLOCK_WIDTH);
   block_num_mask = ~block_in_addr_mask;
-  group_num_mask = mask_with_len(cache_group_num) << BLOCK_WIDTH;
+  group_num_mask = mask_with_len(cache_group_width) << BLOCK_WIDTH;
   tag_mask = ~(gruop_num_mask | block_in_addr_mask);
 
-  cache_slot = malloc(cache_group_num * cache_associativity_width * sizeof(CACH_SLOT));
+  cache_slot = malloc(cache_group_width * cache_associativity_width * sizeof(CACH_SLOT));
   assert(cache_slot);
 }
 
