@@ -29,7 +29,7 @@ static uintptr_t group_num_mask = 0, tag_mask = 0, block_num_mask = 0, block_in_
 #define get_block_from_cache(tag, num) (((tag) << cache_group_width) | (num))
 
 static void read_block_from_mem(uintptr_t addr, int index) {
-  struct CACHE_SLOT *goal = cache_slot + (uintptr_t)(get_line_num(addr, index));
+  struct CACHE_SLOT *goal = cache_slot + (get_line_num(addr, index));
   mem_read(get_block_num(addr), goal->data);
   goal->tag = get_tag(addr);
   goal->valid = true;
