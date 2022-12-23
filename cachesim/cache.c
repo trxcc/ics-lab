@@ -83,7 +83,7 @@ void init_cache(int total_size_width, int associativity_width) {
   group_num_mask = mask_with_len(cache_group_width) << BLOCK_WIDTH;
   tag_mask = ~(group_num_mask | block_in_addr_mask);
 
-  cache_slot = malloc(cache_group_width * cache_associativity_width * sizeof(CACH_SLOT));
+  cache_slot = malloc(cache_group_width * cache_associativity_width * sizeof(CACHE_SLOT));
   assert(cache_slot);
 }
 
