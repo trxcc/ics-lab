@@ -22,7 +22,7 @@ static uintptr_t group_num_mask = 0, tag_mask = 0, block_num_mask = 0, block_in_
 #define get_group_num(x) ((uintptr_t)(((x) & group_num_mask) >> BLOCK_WIDTH))
 #define get_block_in_addr(x) ((uintptr_t)((x) & block_in_addr_mask))
 #define get_tag(x) ((uintptr_t)(((x) & tag_mask) >> (BLOCK_WIDTH + cache_group_width)))
-#define get_block_num (x) ((uintptr_t)(((x) & block_num_mask) >> BLOCK_WIDTH))
+#define get_block_num(x) ((uintptr_t)(((x) & block_num_mask) >> BLOCK_WIDTH))
 
 #define get_line_num(x, i) ((int)((get_group_num(x) << cache_associativity_width) + i))
 #define get_ramdom_line(n) ((int)(rand() % (int)(n))) 
@@ -37,7 +37,7 @@ static void read_block_from_mem(uintptr_t addr, int index) {
 }
 
 static void write_back(uintptr_t addr, int index) {
-  struct CACHE_SLOT *goal = cache_slot + (uintptr_t)(get_line_num(addr, index));
+  struct CACHE_SLOT *goal = cache_slot + (get_line_num(addr, index));
   if (!goal->dirty) return;
   mem_write(get_block_from_cache(goal->tag, get_group_num(addr)), goal->data);
   goal->dirty = false;
