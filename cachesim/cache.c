@@ -61,7 +61,7 @@ uint32_t cache_read(uintptr_t addr) {
   
   write_back(addr, index);
   read_block_from_mem(addr, index);
-  return *((uint32_t *)(&cache_slot[i].data[get_block_in_addr(addr)]));
+  return *((uint32_t *)(&cache_slot[get_line_num(addr, index)].data[get_block_in_addr(addr)]));
 }
 
 void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
@@ -81,7 +81,7 @@ void init_cache(int total_size_width, int associativity_width) {
   block_in_addr_mask = mask_with_len(BLOCK_WIDTH);
   block_num_mask = ~block_in_addr_mask;
   group_num_mask = mask_with_len(cache_group_width) << BLOCK_WIDTH;
-  tag_mask = ~(gruop_num_mask | block_in_addr_mask);
+  tag_mask = ~(group_num_mask | block_in_addr_mask);
 
   cache_slot = malloc(cache_group_width * cache_associativity_width * sizeof(CACH_SLOT));
   assert(cache_slot);
