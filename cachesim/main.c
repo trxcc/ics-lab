@@ -32,6 +32,8 @@ struct trace {
   uint32_t data;
 };
 
+static int cnt = 0;
+
 static void trace_exec(struct trace *t, bool is_check) {
   if (t->t.is_write) {
     cpu_write(t->t.addr, t->t.len, t->data);
@@ -43,7 +45,7 @@ static void trace_exec(struct trace *t, bool is_check) {
     uint32_t ret = cpu_read(t->t.addr, t->t.len);
     if (is_check) {
       uint32_t ret_uncache = cpu_uncache_read(t->t.addr, t->t.len);
-      printf("ret: %u, ret_uncache: %u\n", ret, ret_uncache);
+      printf("cnt: %d, ret: %u, ret_uncache: %u\n", ++cnt, ret, ret_uncache);
       assert(ret == ret_uncache);
     }
   }
