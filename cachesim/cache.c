@@ -43,12 +43,7 @@ static void write_back(uintptr_t addr, int index) {
   goal->dirty = false;
 }
 
-uint32_t cache_read(uintptr_t addr) {
-  for (int i = get_line_num(addr, 0); i < get_line_num(addr, cache_associativity_width); i++) {
-    if (cache_slot[i].valid && get_tag(addr) == cache_slot[i].tag)
-      return *((uint32_t *)(&cache_slot[i].data[get_block_in_addr(addr)]));  
-  }
-
+static int get_index(uintptr_t addr) {
   int index = 0;
   bool find_empty = false;
   for (index = get_line_num(addr, 0); index < get_line_num(addr, cache_associativity_width); index++) {
@@ -58,7 +53,16 @@ uint32_t cache_read(uintptr_t addr) {
     }
   }
   if (!find_empty) index = get_ramdom_line(cache_associativity_width);
-  
+  return index;
+}
+
+uint32_t cache_read(uintptr_t addr) {
+  for (int i = get_line_num(addr, 0); i < get_line_num(addr, cache_associativity_width); i++) {
+    if (cache_slot[i].valid && get_tag(addr) == cache_slot[i].tag)
+      return *((uint32_t *)(&cache_slot[i].data[get_block_in_addr(addr)]));  
+  }
+
+  int index = get_index(addr);
   write_back(addr, index);
   read_block_from_mem(addr, index);
   return *((uint32_t *)(&cache_slot[get_line_num(addr, index)].data[get_block_in_addr(addr)]));
@@ -66,11 +70,25 @@ uint32_t cache_read(uintptr_t addr) {
 
 void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
   bool is_hit = false;
-  for (int i = get_line_num(addr, 0); i < get_line_num(addr, cache_associativity_width); i++) {
+  int i;
+  for (i = get_line_num(addr, 0); i < get_line_num(addr, cache_associativity_width); i++) {
     if (cache_slot[i].valid && get_tag(addr) == cache_slot[i].tag) {
       is_hit = true;
+      break;
     }
   }
+  struct CACHE_SLOT *goal;
+  if (is_hit) goal = &cache_slot[i];
+  else {
+    int index = get_index(addr);
+    goal = &cache_slot[get_line_num(addr, index)];
+    if (goal->valid) write_back(addr, index);
+    read_block_from_mem(addr, index);
+  }
+
+  uint32_t *updating_data = (uint32_t *)(&goal->data[get_block_in_addr(addr)]);
+  *updating_data = (data & wmask) | (*updating_data & (~wmask));
+  goal->dirty = true;
 }
 
 void init_cache(int total_size_width, int associativity_width) {
