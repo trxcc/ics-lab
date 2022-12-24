@@ -8,7 +8,7 @@ static uint64_t cycle_cnt = 0;
 
 void cycle_increase(int n) { cycle_cnt += n; }
 
-typedef struct{
+static typedef struct{
   uint8_t data[BLOCK_SIZE];
   uintptr_t tag;
   bool valid;
