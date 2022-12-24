@@ -23,6 +23,7 @@ static uintptr_t group_num_mask = 0, tag_mask = 0, block_num_mask = 0, block_in_
 #define get_block_in_addr(x) ((uintptr_t)((x) & block_in_addr_mask))
 #define get_tag(x) ((uintptr_t)(((x) & tag_mask) >> (BLOCK_WIDTH + cache_group_width)))
 #define get_block_num(x) ((uintptr_t)(((x) & block_num_mask) >> BLOCK_WIDTH))
+#define get_inner_addr(x) ((get_block_in_addr((x))) & ~0x3)
 
 #define get_line_num(x, i) ((int)((get_group_num(x) << cache_associativity_width) + i))
 #define get_ramdom_line(n) ((int)(rand() % (int)(n))) 
@@ -59,13 +60,13 @@ static int get_index(uintptr_t addr) {
 uint32_t cache_read(uintptr_t addr) {
   for (int i = get_line_num(addr, 0); i < get_line_num(addr, cache_associativity_width); i++) {
     if (cache_slot[i].valid && get_tag(addr) == cache_slot[i].tag)
-      return *((uint32_t *)(&cache_slot[i].data[get_block_in_addr(addr)]));  
+      return *((uint32_t *)(&cache_slot[i].data[get_inner_addr(addr)]));  
   }
 
   int index = get_index(addr);
   write_back(addr, index);
   read_block_from_mem(addr, index);
-  return *((uint32_t *)(&cache_slot[get_line_num(addr, index)].data[get_block_in_addr(addr)]));
+  return *((uint32_t *)(&cache_slot[get_line_num(addr, index)].data[get_inner_addr(addr)]));
 }
 
 void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
@@ -86,7 +87,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
     read_block_from_mem(addr, index);
   }
 
-  uint32_t *updating_data = (uint32_t *)(&goal->data[get_block_in_addr(addr)]);
+  uint32_t *updating_data = (uint32_t *)(&goal->data[get_inner_addr(addr)]);
   *updating_data = (data & wmask) | (*updating_data & (~wmask));
   goal->dirty = true;
 }
