@@ -49,8 +49,8 @@ static void write_back(uintptr_t addr, uint32_t index) {
 static uint32_t get_index(uintptr_t addr) {
   uint32_t index = 0;
   bool find_empty = false;
-  for (index = get_line_num(addr, 0); index < get_line_num(addr, cache_associativity_width); index++) {
-    if (!cache_slot[index].valid) {
+  for (index = 0; index < cache_associativity_width; index++) {
+    if (!cache_slot[get_line_num(addr, index)].valid) {
       find_empty = true;
       break;
     }
