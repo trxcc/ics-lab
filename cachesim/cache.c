@@ -40,6 +40,7 @@ static void read_block_from_mem(uintptr_t addr, int index) {
 static void write_back(uintptr_t addr, int index) {
   struct CACHE_SLOT *goal = &cache_slot[get_line_num(addr, index)];
   if (!goal->dirty) return;
+  printf("Write_back happens!\n");
   mem_write(get_block_from_cache(goal->tag, get_group_num(addr)), goal->data);
   goal->dirty = false;
 }
