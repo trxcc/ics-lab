@@ -8,12 +8,12 @@ static uint64_t cycle_cnt = 0;
 
 void cycle_increase(int n) { cycle_cnt += n; }
 
-static typedef struct{
+struct CACHE_SLOT{
   uint8_t data[BLOCK_SIZE];
   uintptr_t tag;
   bool valid;
   bool dirty;
-}CACHE_SLOT;
+};
 
 static struct CACHE_SLOT *cache_slot;
 static uint32_t cache_total_width = 0, cache_associativity_width = 0, cache_group_width = 0;
