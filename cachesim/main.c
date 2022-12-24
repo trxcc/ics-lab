@@ -35,7 +35,7 @@ struct trace {
 static int cnt = 0;
 
 static void trace_exec(struct trace *t, bool is_check) {
-  printf("addr: 0x%08x, len: %u, data: 0x%08x, is_write: %u\n", t->t.addr, t->t.len, t->data, t->t.is_write);
+  printf("\naddr: 0x%08x, len: %u, data: 0x%08x, is_write: %u\n", t->t.addr, t->t.len, t->data, t->t.is_write);
   if (t->t.is_write) {
     cpu_write(t->t.addr, t->t.len, t->data);
     if (is_check) {

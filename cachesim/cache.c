@@ -31,6 +31,7 @@ static uintptr_t group_num_mask = 0, tag_mask = 0, block_num_mask = 0, block_in_
 
 static void read_block_from_mem(uintptr_t addr, int index) {
   struct CACHE_SLOT *goal = &cache_slot[get_line_num(addr, index)];
+  printf("Read from happens in line %d with tag 0x%08x, block: %d\n", get_line_num(addr, index), goal->tag, get_block_num(addr));
   mem_read(get_block_num(addr), goal->data);
   goal->tag = get_tag(addr);
   goal->valid = true;
@@ -40,7 +41,7 @@ static void read_block_from_mem(uintptr_t addr, int index) {
 static void write_back(uintptr_t addr, int index) {
   struct CACHE_SLOT *goal = &cache_slot[get_line_num(addr, index)];
   if (!goal->dirty) return;
-  //printf("Write_back happens in line %d with %lu\n", get_line_num(addr, index), goal->tag);
+  printf("Write_back happens in line %d with tag 0x%08x, block: %d\n", get_line_num(addr, index), goal->tag, get_block_from_cache(goal->tag, get_group_num(addr)));
   mem_write(get_block_from_cache(goal->tag, get_group_num(addr)), goal->data);
   goal->dirty = false;
 }
@@ -63,8 +64,8 @@ uint32_t cache_read(uintptr_t addr) {
     if (cache_slot[i].valid && get_tag(addr) == cache_slot[i].tag)
       return *((uint32_t *)(&cache_slot[i].data[get_inner_addr(addr)]));  
   }
-
   int index = get_index(addr);
+  printf("Cache read not hit, addr: 0x%08x, index: %d, line: %d, group: %d, \n", addr, index, line, group);
   write_back(addr, index);
   read_block_from_mem(addr, index);
   return *((uint32_t *)(&cache_slot[get_line_num(addr, index)].data[get_inner_addr(addr)]));
@@ -83,6 +84,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
   if (is_hit) goal = &cache_slot[i];
   else {
     int index = get_index(addr);
+    printf("Cache write not hit, addr: 0x%08x, index: %d, line: %d, group: %d, \n", addr, index, line, group);
     goal = &cache_slot[get_line_num(addr, index)];
     if (goal->valid) write_back(addr, index);
     read_block_from_mem(addr, index);
