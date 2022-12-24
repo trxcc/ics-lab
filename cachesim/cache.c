@@ -65,7 +65,7 @@ uint32_t cache_read(uintptr_t addr) {
       return *((uint32_t *)(&cache_slot[i].data[get_inner_addr(addr)]));  
   }
   int index = get_index(addr);
-  printf("Cache read not hit, addr: 0x%08lx, index: %d, line: %ld, group: %ld, \n", addr, index, get_line_num(addr, index), get_group_num(addr));
+  printf("Cache read not hit, addr: 0x%08lx, index: %d, line: %d, group: %ld, \n", addr, index, get_line_num(addr, index), get_group_num(addr));
   write_back(addr, index);
   read_block_from_mem(addr, index);
   return *((uint32_t *)(&cache_slot[get_line_num(addr, index)].data[get_inner_addr(addr)]));
@@ -84,7 +84,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
   if (is_hit) goal = &cache_slot[i];
   else {
     int index = get_index(addr);
-  printf("Cache write not hit, addr: 0x%08lx, index: %d, line: %ld, group: %ld, \n", addr, index, get_line_num(addr, index), get_group_num(addr));
+  printf("Cache write not hit, addr: 0x%08lx, index: %d, line: %d, group: %ld, \n", addr, index, get_line_num(addr, index), get_group_num(addr));
     goal = &cache_slot[get_line_num(addr, index)];
     if (goal->valid) write_back(addr, index);
     read_block_from_mem(addr, index);
